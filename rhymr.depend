@@ -1,0 +1,48 @@
+# depslib dependency file v1.0
+1512227556 source:c:\users\alege\documents\github\rhymr\src\list.cpp
+	<assert.h>
+	"List.h"
+
+1512227556 c:\users\alege\documents\github\rhymr\src\list.h
+
+1512227363 source:c:\users\alege\documents\github\rhymr\src\main.cpp
+	<tchar.h>
+	<windows.h>
+
+1512227554 source:c:\users\alege\documents\github\rhymr\src\stringmap.cpp
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	"tchar.h"
+	"StringMap.h"
+
+1512227555 c:\users\alege\documents\github\rhymr\src\stringmap.h
+	"List.h"
+	<stdio.h>
+
+1512227554 source:c:\users\alege\documents\github\rhymr\src\worddatabase.cpp
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	<assert.h>
+	<ctype.h>
+	"WordDatabase.h"
+	"WordFrequencyAnalyzer.h"
+
+1512227555 c:\users\alege\documents\github\rhymr\src\worddatabase.h
+	"DynamicArray.h"
+	"StringMap.h"
+
+1512227555 c:\users\alege\documents\github\rhymr\src\dynamicarray.h
+	<assert.h>
+	<stdlib.h>
+
+1512227555 c:\users\alege\documents\github\rhymr\src\wordfrequencyanalyzer.h
+	"WordDatabase.h"
+	<map>
+
+1512227555 source:c:\users\alege\documents\github\rhymr\src\wordfrequencyanalyzer.cpp
+	<stdio.h>
+	<string.h>
+	"WordFrequencyAnalyzer.h"
+
