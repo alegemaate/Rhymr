@@ -12,17 +12,17 @@ class RhymeList
     RhymeList();
     virtual ~RhymeList();
 
-    void sendWord( std::string word);
+    int loadDict( char* file);
 
-    int numRhymes();
-
-    std::vector<std::string> getWords();
-    std::vector<std::string> getWords( int syllableCount);
+    // Returns all words as characters
+    WordArray getWords( char* word);
+    WordArray getWords( char* word, int syllableCount);
 
   protected:
 
   private:
-    int rhymeCount;
+    WordArray filteredWords;
+    WordDatabase db;
 };
 
 #endif // RHYMELIST_H
