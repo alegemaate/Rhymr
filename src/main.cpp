@@ -13,6 +13,10 @@ LRESULT CALLBACK WindowProcedure (HWND, UINT, WPARAM, LPARAM);
 /*  Make the class name into a global variable  */
 TCHAR szClassName[ ] = _T("Rhymr");
 
+HWND hwndButton;
+HWND static_label;
+enum { ID_LABEL = 1,ID_IMAGE,ID_EDIT,ID_LIST,ID_BUTTON,ID_COMBO, ID_BUTTON2 };
+
 int WINAPI WinMain( HINSTANCE hThisInstance, HINSTANCE hPrevInstance, LPSTR lpszArgument, int nCmdShow)
 {
     HWND hwnd;               /* This is the handle for our window */
@@ -76,12 +80,27 @@ int WINAPI WinMain( HINSTANCE hThisInstance, HINSTANCE hPrevInstance, LPSTR lpsz
 /*  This function is called by the Windows function DispatchMessage()  */
 LRESULT CALLBACK WindowProcedure( HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    switch( message){                  /* handle the messages */
-        case WM_DESTROY:
-            PostQuitMessage (0);       /* send a WM_QUIT to the message queue */
+  switch( message){                 /* handle the messages */
+    case WM_CREATE:
+      hwndButton = CreateWindow(
+            "BUTTON", "OK", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+            10, 10, 100, 100, hwnd, (HMENU)ID_BUTTON, (HINSTANCE)GetWindowLong(hwnd, GWL_HINSTANCE), NULL);
+
+      static_label = CreateWindow("Static", "Please Enter A Number",WS_CHILD | WS_VISIBLE,
+            40, 15, 200, 25, hwnd, 0, (HINSTANCE)GetWindowLong(hwnd, GWL_HINSTANCE), 0);
+      break;
+    case WM_COMMAND: //Command from Child windows and menus are under this message
+      switch(wParam){
+        case ID_BUTTON:
+            SetWindowText(static_label,"You clicked the button");
             break;
-        default:                       /* for messages that we don't deal with */
-            return DefWindowProc (hwnd, message, wParam, lParam);
-    }
-    return 0;
+      }
+      break;
+    case WM_DESTROY:
+      PostQuitMessage (0);       /* send a WM_QUIT to the message queue */
+      break;
+    default:                       /* for messages that we don't deal with */
+      return DefWindowProc (hwnd, message, wParam, lParam);
+  }
+  return 0;
 }
