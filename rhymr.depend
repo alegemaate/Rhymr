@@ -5,9 +5,10 @@
 
 1512227556 c:\users\alege\documents\github\rhymr\src\list.h
 
-1512229082 source:c:\users\alege\documents\github\rhymr\src\main.cpp
+1512237592 source:c:\users\alege\documents\github\rhymr\src\main.cpp
 	<tchar.h>
 	<windows.h>
+	"RhymeList.h"
 
 1512227554 source:c:\users\alege\documents\github\rhymr\src\stringmap.cpp
 	<string.h>
@@ -20,7 +21,7 @@
 	"List.h"
 	<stdio.h>
 
-1512227554 source:c:\users\alege\documents\github\rhymr\src\worddatabase.cpp
+1512233139 source:c:\users\alege\documents\github\rhymr\src\worddatabase.cpp
 	<stdlib.h>
 	<string.h>
 	<stdio.h>
@@ -46,10 +47,11 @@
 	<string.h>
 	"WordFrequencyAnalyzer.h"
 
-1512229306 source:c:\users\alege\documents\github\rhymr\src\rhymelist.cpp
+1512236795 source:c:\users\alege\documents\github\rhymr\src\rhymelist.cpp
 	"RhymeList.h"
 
-1512229336 c:\users\alege\documents\github\rhymr\include\rhymelist.h
+1512236768 c:\users\alege\documents\github\rhymr\include\rhymelist.h
 	<string>
 	<vector>
+	"WordDatabase.h"
 

@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 		</Build>
@@ -25,7 +26,18 @@
 			<Add library="kernel32" />
 			<Add library="comctl32" />
 		</Linker>
-		<Unit filename="main.cpp" />
+		<Unit filename="include/RhymeList.h" />
+		<Unit filename="src/DynamicArray.h" />
+		<Unit filename="src/List.cpp" />
+		<Unit filename="src/List.h" />
+		<Unit filename="src/RhymeList.cpp" />
+		<Unit filename="src/StringMap.cpp" />
+		<Unit filename="src/StringMap.h" />
+		<Unit filename="src/WordDatabase.cpp" />
+		<Unit filename="src/WordDatabase.h" />
+		<Unit filename="src/WordFrequencyAnalyzer.cpp" />
+		<Unit filename="src/WordFrequencyAnalyzer.h" />
+		<Unit filename="src/main.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
