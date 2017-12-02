@@ -182,7 +182,7 @@ MobyToPartOfSpeech( char ch )
     }
 }
 
-static unsigned 
+static unsigned
 generateSyllables(const char* mobyText, unsigned short* pron, unsigned short maxSize, unsigned*
         pnumSyllables );
 
@@ -273,7 +273,7 @@ WordDatabase::addSynonym( Word* base, Word* synonym )
     base->synonyms.append(synonym);
 }
 
-bool 
+bool
 WordDatabase::loadThesaurus( const char* thesaurus )
 {
     FILE* file = fopen( thesaurus, "rt" );
@@ -281,13 +281,13 @@ WordDatabase::loadThesaurus( const char* thesaurus )
         fprintf(stderr, "Cannot load thesaurus: %s\n", thesaurus );
         return false;
     }
-    
+
     char linebuff[13*1024];
 
     for( ;; ) {
-        
+
         char* line = fgets( linebuff, sizeof(linebuff), file );
-        
+
         if ( line == 0 ) {
             break;
         }
@@ -304,25 +304,25 @@ WordDatabase::loadThesaurus( const char* thesaurus )
         }
 
         token = strtok( NULL, ",\n");
-        
+
         while( token ) {
             Word* synonym = lookup( token );
             if ( synonym ) {
                 addSynonym( root, synonym );
             }
-            
+
             token = strtok( NULL, ",\n" );
         }
     }
 
     printf("Loaded thesaurus.\n");
-    
+
     fclose( file );
     return true;
 }
 
 
-void 
+void
 Word::printPron()
 {
     unsigned i = 0;
@@ -338,7 +338,7 @@ void
 Word::print()
 {
     printf("%s %d %s ",
-		    text, 
+		    text,
             numSyllables,
             partOfSpeech == POS_Noun ? "Noun" :
             partOfSpeech == POS_Plural ? "Plural" :
@@ -380,7 +380,7 @@ Word::pronToText( unsigned short pr, char* buffer )
         *buffer = syllable + '0';
         buffer++;
     }
-    
+
     strcpy( buffer, which);
     if ( syllable == 2 ) {
         while( *buffer ) {
@@ -390,7 +390,7 @@ Word::pronToText( unsigned short pr, char* buffer )
     }
 }
 
-bool 
+bool
 Word::matchesStress( const char* stresses )
 {
     if ( stresses[0] ) {
@@ -402,7 +402,7 @@ Word::matchesStress( const char* stresses )
             }
 
             unsigned syllable = pron[pos] >> 14;
-            
+
             if ( syllable > 0 ) {
                 if ( (syllable == 2 || syllable == 3) && stresses[stress] == '0' ) {
                     return false;
@@ -415,7 +415,7 @@ Word::matchesStress( const char* stresses )
     return true;
 }
 
-static unsigned 
+static unsigned
 generateSyllables(const char* mobyText, unsigned short* pron, unsigned short maxSize, unsigned*
         pnumSyllables)
 {
@@ -442,7 +442,7 @@ generateSyllables(const char* mobyText, unsigned short* pron, unsigned short max
         "Z",    //sounds like the "s" in "vision"     S18
         "aI",   //sounds like the "i" in "ice"        V19
         "b",    //sounds like the "b" in "nab"        S20
-        "d",    //sounds like the "d" in "pod"        S21 
+        "d",    //sounds like the "d" in "pod"        S21
         "dZ",   //sounds like the "g" in "vegetably"  S22
         "eI",   //sounds like the "a" in "day"        V23
         "f",    //sounds like the "f" in "elf"        S24
@@ -471,11 +471,11 @@ generateSyllables(const char* mobyText, unsigned short* pron, unsigned short max
 #endif
 
     enum State {
-        start, 
+        start,
         got_lparen,
         got_lparen_at,
         got_a,
-        got_at, 
+        got_at,
         got_A,
         got_O,
         got_d,
@@ -528,7 +528,7 @@ generateSyllables(const char* mobyText, unsigned short* pron, unsigned short max
         { start, 'Y', u_in_duboise, start },
         { start, 'V', v_in_average, start }, // french? not in readme,
         { start, 'W', -1, got_W }, // not in readme
-        { got_W, 'A', wa_in_noire, start }, 
+        { got_W, 'A', wa_in_noire, start },
         { start, 'Z', s_in_vision, start },
         { start, 'b', b_in_nab, start },
         { start, 'd', -1, got_d  },
@@ -587,8 +587,8 @@ generateSyllables(const char* mobyText, unsigned short* pron, unsigned short max
             return 0;
         }
 
-		//printf("ch: %c state: %d\n", ch, state ); 
-        
+		//printf("ch: %c state: %d\n", ch, state );
+
         // search state machine for what to do.
         for( unsigned i = 0; i < sizeof(stateMachine)/sizeof(*stateMachine); i++ ) {
             if ( stateMachine[i].state == state && (stateMachine[i].ch == ch ||
@@ -629,7 +629,7 @@ generateSyllables(const char* mobyText, unsigned short* pron, unsigned short max
 
         if ( !found ) {
             // error.
-            //printf("Couldn't parse: %s in %s\n", pos, mobyText ); 
+            //printf("Couldn't parse: %s in %s\n", pos, mobyText );
             return 0;
         }
     }
@@ -666,7 +666,7 @@ getCommonSuffixLength( Word* word1, Word* word2 )
 
 static Word* rootWord = 0;
 
-int 
+int
 suffixCompare( const void* pfirst, const void* psecond )
 {
     Word* first = *((Word**)pfirst);
@@ -707,7 +707,7 @@ unsigned CountPhenomes( Word* word )
     return pos;
 }
 
-bool 
+bool
 WordDatabase::findRhymes( DynamicArray<Word*>& results, const char* whichword, WordFilter* filter,
         WordArray* wordList )
 {
@@ -734,8 +734,8 @@ WordDatabase::findRhymes( DynamicArray<Word*>& results, const char* whichword, W
         if ( filter && !(*wordList)[i]->match( filter ) ) {
             continue;
         }
-        
-        // if they share any suffix, 
+
+        // if they share any suffix,
         unsigned count = getCommonSuffixLength( word, (*wordList)[i] );
         if ( count > minLength ) {
             // add it to the results.
@@ -783,9 +783,9 @@ RemovePunctuation( char* text )
     unsigned deleted = 0;
     for( ;; ) {
 
-        if ( text[i] >= 'A' && text[i] <= 'Z' || 
-                text[i] >= 'a' && text[i] <= 'z' || text[i] == '\'' || 
-                text[i] == ' ' || text[i] == 0) 
+        if ( (text[i] >= 'A' && text[i] <= 'Z') ||
+                (text[i] >= 'a' && text[i] <= 'z') || text[i] == '\'' ||
+                text[i] == ' ' || text[i] == 0)
         {
             if ( deleted ) {
                 text[i-deleted] = text[i];
@@ -803,7 +803,7 @@ RemovePunctuation( char* text )
     }
 }
 
-bool 
+bool
 WordDatabase::makeWords( WordArray& results, const char* text )
 {
     char* copy = _strdup( text );
@@ -898,7 +898,7 @@ WordAssembler::addSolution( WordArray& phrase )
         for( int k = solution.length-1; k >= 0; k-- ) {
             solution.words[k]->printPron();
         }
-        
+
             printf("]\n");
     }
 
@@ -910,20 +910,20 @@ WordAssembler::addSolution( WordArray& phrase )
 }
 
 void
-WordAssembler::enumerateSolutions( unsigned depth, PartOfSpeech_t POS[], 
-        unsigned length, unsigned numSyllables, WordArray& phrase, 
+WordAssembler::enumerateSolutions( unsigned depth, PartOfSpeech_t POS[],
+        unsigned length, unsigned numSyllables, WordArray& phrase,
         const char* rhyme, const char* stresses )
 {
-    unsigned stressLen = 0;
+    //unsigned stressLen = 0;
     unsigned syllablesUsed = 0;
     if ( stresses ) {
-        stressLen = strlen( stresses );
+        //stressLen = strlen( stresses );
 
         for ( unsigned i = 0; i < phrase.size(); i++ ) {
             syllablesUsed += phrase[i]->numSyllables;
         }
     }
-    
+
     // loop from N to 1.
     for( int i = numSyllables - 1; i >= 0; i-- ) {
         // for each n-syllable word matching that LAST part of speech that rhymes with the given
@@ -935,22 +935,22 @@ WordAssembler::enumerateSolutions( unsigned depth, PartOfSpeech_t POS[],
             _worddb->findRhymes( rhymes, rhyme, NULL, choices );
             choices = &rhymes;
         }
-        
+
         for ( unsigned j = 0; j < choices->size(); j++ ) {
-            
+
             if ( stresses ) {
                 if (!(*choices)[j]->matchesStress( &stresses[numSyllables - syllablesUsed-
                             (*choices)[j]->numSyllables] ) ) {
                     continue;
                 }
             }
-            
+
             phrase.append( (*choices)[j] );
 
             // if it is not possible to recurse then just output the phrase.
             if ( length-depth-1 == 0 && numSyllables - syllablesUsed == (*choices)[j]->numSyllables ) {
                 addSolution( phrase );
-            } else if ( length - depth - 1 > 0 && 
+            } else if ( length - depth - 1 > 0 &&
 				    (int)numSyllables - syllablesUsed - (int)(*choices)[j]->numSyllables > 0 ) {
                 enumerateSolutions( depth+1, POS, length, numSyllables, phrase, 0, stresses );
             }
@@ -960,7 +960,7 @@ WordAssembler::enumerateSolutions( unsigned depth, PartOfSpeech_t POS[],
     }
 }
 
-int 
+int
 WordAssembler::solutionCompare( const void* pfirst, const void* psecond )
 {
     Solution* first = (Solution*)pfirst;
@@ -994,7 +994,7 @@ WordAssembler::run( PartOfSpeech_t POS[], unsigned length, unsigned numSyllables
         // find all words that are between 1 and numSyllables long.
         filter.maxSyllables = numSyllables;
         filter.partOfSpeech = POS[i];
-        
+
         _worddb->filter( results, &filter );
 
         // separate them and store into their correct location in the table.
@@ -1010,7 +1010,7 @@ WordAssembler::run( PartOfSpeech_t POS[], unsigned length, unsigned numSyllables
             for( unsigned j = 0; j < numSyllables; j++ ) {
                 printf("-- POS: %d Length: %d\n", POS[i], j+1);
                 for( unsigned k = 0; k < table[i][j].size(); k++ ) {
-                    table[i][j][k]->print();                
+                    table[i][j][k]->print();
                 }
             }
         }
@@ -1029,7 +1029,7 @@ WordAssembler::run( PartOfSpeech_t POS[], unsigned length, unsigned numSyllables
     delete[] table;
 
     printf("Sorting...\n");
-    
+
 	if ( solutions.size() > 0 ) {
 		qsort( &solutions[0], solutions.size(), sizeof(Solution), solutionCompare );
 	}
@@ -1044,7 +1044,7 @@ WordAssembler::run( PartOfSpeech_t POS[], unsigned length, unsigned numSyllables
         for( int k = solutions[i].length-1; k >= 0; k-- ) {
             solutions[i].words[k]->printPron();
         }
-    
+
         printf("]\n");
     }
 }
