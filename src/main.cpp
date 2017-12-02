@@ -11,12 +11,9 @@
 LRESULT CALLBACK WindowProcedure (HWND, UINT, WPARAM, LPARAM);
 
 /*  Make the class name into a global variable  */
-TCHAR szClassName[ ] = _T("CodeBlocksWindowsApp");
+TCHAR szClassName[ ] = _T("Rhymr");
 
-int WINAPI WinMain (HINSTANCE hThisInstance,
-                     HINSTANCE hPrevInstance,
-                     LPSTR lpszArgument,
-                     int nCmdShow)
+int WINAPI WinMain( HINSTANCE hThisInstance, HINSTANCE hPrevInstance, LPSTR lpszArgument, int nCmdShow)
 {
     HWND hwnd;               /* This is the handle for our window */
     MSG messages;            /* Here messages to the application are saved */
@@ -36,6 +33,7 @@ int WINAPI WinMain (HINSTANCE hThisInstance,
     wincl.lpszMenuName = NULL;                 /* No menu */
     wincl.cbClsExtra = 0;                      /* No extra bytes after the window class */
     wincl.cbWndExtra = 0;                      /* structure or the window instance */
+
     /* Use Windows's default colour as the background of the window */
     wincl.hbrBackground = (HBRUSH) COLOR_BACKGROUND;
 
@@ -47,12 +45,12 @@ int WINAPI WinMain (HINSTANCE hThisInstance,
     hwnd = CreateWindowEx (
            0,                   /* Extended possibilites for variation */
            szClassName,         /* Classname */
-           _T("Code::Blocks Template Windows App"),       /* Title Text */
+           _T("Rhymr"),       /* Title Text */
            WS_OVERLAPPEDWINDOW, /* default window */
            CW_USEDEFAULT,       /* Windows decides the position */
            CW_USEDEFAULT,       /* where the window ends up on the screen */
-           544,                 /* The programs width */
-           375,                 /* and height in pixels */
+           600,                 /* The programs width */
+           400,                 /* and height in pixels */
            HWND_DESKTOP,        /* The window is a child-window to desktop */
            NULL,                /* No menu */
            hThisInstance,       /* Program Instance handler */
@@ -63,8 +61,7 @@ int WINAPI WinMain (HINSTANCE hThisInstance,
     ShowWindow (hwnd, nCmdShow);
 
     /* Run the message loop. It will run until GetMessage() returns 0 */
-    while (GetMessage (&messages, NULL, 0, 0))
-    {
+    while (GetMessage (&messages, NULL, 0, 0)){
         /* Translate virtual-key messages into character messages */
         TranslateMessage(&messages);
         /* Send message to WindowProcedure */
@@ -77,16 +74,14 @@ int WINAPI WinMain (HINSTANCE hThisInstance,
 
 
 /*  This function is called by the Windows function DispatchMessage()  */
-LRESULT CALLBACK WindowProcedure (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK WindowProcedure( HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    switch (message)                  /* handle the messages */
-    {
+    switch( message){                  /* handle the messages */
         case WM_DESTROY:
             PostQuitMessage (0);       /* send a WM_QUIT to the message queue */
             break;
-        default:                      /* for messages that we don't deal with */
+        default:                       /* for messages that we don't deal with */
             return DefWindowProc (hwnd, message, wParam, lParam);
     }
-
     return 0;
 }
