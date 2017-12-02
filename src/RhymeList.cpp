@@ -1,32 +1,35 @@
 #include "RhymeList.h"
 
-RhymeList::RhymeList(){
+// Ctor
+RhymeList::RhymeList(){ }
 
-}
+// Dtor
+RhymeList::~RhymeList(){ }
 
-RhymeList::~RhymeList(){
-
-}
-
-int RhymeList::loadDict( std::string file){
-  if ( !(this -> db.load(file.c_str()))) {
+// Loads a dictionary from file
+int RhymeList::loadDict( char* file){
+  if ( !(this -> db.load(file))) {
 		return -1;
 	}
 	return 0;
 }
 
-void RhymeList::sendWord( std::string word){
-	db.findRhymes( this -> words, word.c_str(), NULL );
-}
-
-int RhymeList::numRhymes(){
-  return words.size();
-}
-
-WordArray RhymeList::getWords(){
+// Gets all words
+WordArray RhymeList::getWords( char* word){
+  WordArray words;
+  db.findRhymes( words, word, NULL );
   return words;
 }
 
-WordArray RhymeList::getWords( int syllableCount){
+// Get words of given syllable count
+WordArray RhymeList::getWords( char* word, int syllableCount){
+  WordArray words;
+  WordFilter theFilter;
+
+  theFilter.maxSyllables = syllableCount;
+  theFilter.minSyllables = syllableCount;
+
+  db.findRhymes( words, word, &theFilter );
+
   return words;
 }

@@ -939,8 +939,8 @@ WordAssembler::enumerateSolutions( unsigned depth, PartOfSpeech_t POS[],
         for ( unsigned j = 0; j < choices->size(); j++ ) {
 
             if ( stresses ) {
-                if (!(*choices)[j]->matchesStress( &stresses[numSyllables - syllablesUsed-
-                            (*choices)[j]->numSyllables] ) ) {
+                if (!(*choices)[j]->matchesStress( &stresses[numSyllables - syllablesUsed -
+                     (*choices)[j]->numSyllables] ) ) {
                     continue;
                 }
             }
