@@ -20,7 +20,7 @@ StringMapBase::StringMapBase( unsigned size )
     construct( nextPrimeNumber( size ) );
 }
 
-unsigned 
+unsigned
 StringMapBase::nextPrimeNumber( unsigned size )
 {
     if ( size == 0 ) {
@@ -38,7 +38,7 @@ StringMapBase::nextPrimeNumber( unsigned size )
 }
 
 void
-StringMapBase::construct( unsigned size ) 
+StringMapBase::construct( unsigned size )
 {
     entries_alloc = size; // prime
     entries = (Entry_t**)malloc( entries_alloc * sizeof(Entry_t*));
@@ -125,7 +125,7 @@ StringMapBase::lookup( const char* key )
     return 0;
 }
 
-void 
+void
 StringMapBase::remove( const char* key )
 {
     unsigned h = hash( key );
@@ -188,7 +188,7 @@ StringMapBase::next()
     }
 }
 
-unsigned 
+unsigned
 StringMapBase::hash( const char* str )
 {
     unsigned hash = 5381;

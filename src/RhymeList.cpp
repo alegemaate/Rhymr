@@ -7,7 +7,7 @@ RhymeList::RhymeList(){ }
 RhymeList::~RhymeList(){ }
 
 // Loads a dictionary from file
-int RhymeList::loadDict( char* file){
+int RhymeList::loadDict( const char* file){
   if ( !(this -> db.load(file))) {
 		return -1;
 	}
@@ -15,14 +15,14 @@ int RhymeList::loadDict( char* file){
 }
 
 // Gets all words
-WordArray RhymeList::getWords( char* word){
+WordArray RhymeList::getWords( const char* word){
   WordArray words;
   db.findRhymes( words, word, NULL );
   return words;
 }
 
 // Get words of given syllable count
-WordArray RhymeList::getWords( char* word, int syllableCount){
+WordArray RhymeList::getWords( const char* word, int syllableCount){
   WordArray words;
   WordFilter theFilter;
 
