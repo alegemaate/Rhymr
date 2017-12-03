@@ -18,7 +18,7 @@ public:
     void* first();
     void* next();
     void clear();
-    bool empty();    
+    bool empty();
 
 protected:
     bool allowDuplicates;
@@ -44,7 +44,7 @@ template< class PTR >
 class StringMap : protected StringMapBase
 {
 public:
-    StringMap() 
+    StringMap()
     {
     }
 
@@ -80,14 +80,14 @@ public:
     bool empty() {
         return StringMapBase::empty();
     }
-    
+
 };
 
 template< class PTR >
 class StringMultiMap : protected StringMapBase
 {
 public:
-    StringMultiMap() 
+    StringMultiMap()
     {
     }
 
@@ -95,10 +95,10 @@ public:
     {
     }
 
-    
+
     void add( const char* key, PTR value ) {
 
-        List<PTR>* list = 
+        List<PTR>* list =
             static_cast<List<PTR>* >( StringMapBase::lookup(key) );
 
         if ( list == 0 ) {
@@ -110,12 +110,12 @@ public:
     }
 
     const List<PTR>* lookup( const char* key ) {
-        List<PTR>* list = 
+        List<PTR>* list =
             static_cast< List<PTR>* >( StringMapBase::lookup(key) );
         if ( list == 0 ) {
             return &EmptyList;
         }
-            
+
         return list;
     }
 

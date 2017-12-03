@@ -12,11 +12,11 @@ class RhymeList
     RhymeList();
     virtual ~RhymeList();
 
-    int loadDict( char* file);
+    int loadDict( const char* file);
 
     // Returns all words as characters
-    WordArray getWords( char* word);
-    WordArray getWords( char* word, int syllableCount);
+    WordArray getWords( const char* word);
+    WordArray getWords( const char* word, int syllableCount);
 
   protected:
 
